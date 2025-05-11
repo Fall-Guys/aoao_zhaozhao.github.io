@@ -3,20 +3,689 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的静态网站</title>
-    <!-- 引入外部CSS文件 -->
-    <link rel="stylesheet" href="styles/main.css">
+    <title>我们的时光胶囊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF5E87',
+                        secondary: '#FFB6C1',
+                        accent: '#FF9A9E',
+                        light: '#FFF5F7',
+                        dark: '#332C39'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            }
+            .animate-float {
+                animation: float 3s ease-in-out infinite;
+            }
+            .memory-card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .memory-card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(255, 94, 135, 0.2);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <h1>欢迎来到我的网站</h1>
+<body class="font-inter bg-gradient-to-br from-light to-white min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-heart text-primary text-2xl animate-pulse"></i>
+                <h1 class="text-xl md:text-2xl font-bold text-dark">我们的时光胶囊</h1>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-dark hover:text-primary transition-colors font-medium">首页</a>
+                <a href="#memories" class="text-dark hover:text-primary transition-colors font-medium">回忆墙</a>
+                <a href="#gallery" class="text-dark hover:text-primary transition-colors font-medium">照片墙</a>
+                <a href="#milestones" class="text-dark hover:text-primary transition-colors font-medium">重要时刻</a>
+                <a href="#add-memory" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all shadow-md hover:shadow-lg">
+                    <i class="fa-plus mr-2"></i>添加回忆
+                </a>
+            </nav>
+            <button class="md:hidden text-dark text-xl" id="menu-toggle">
+                <i class="fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#home" class="text-dark hover:text-primary transition-colors font-medium py-2">首页</a>
+                <a href="#memories" class="text-dark hover:text-primary transition-colors font-medium py-2">回忆墙</a>
+                <a href="#gallery" class="text-dark hover:text-primary transition-colors font-medium py-2">照片墙</a>
+                <a href="#milestones" class="text-dark hover:text-primary transition-colors font-medium py-2">重要时刻</a>
+                <a href="#add-memory" class="bg-primary hover:bg-primary/90 text-white px-5 py-3 rounded-full transition-all shadow-md hover:shadow-lg text-center">
+                    <i class="fa-plus mr-2"></i>添加回忆
+                </a>
+            </div>
+        </div>
     </header>
-    <main>
-        <p>这是一个静态网站示例。</p>
-        <button id="myButton">点击我</button>
-    </main>
-    <!-- 引入外部JavaScript文件，建议放在body底部，以加快页面加载速度 -->
-    <script src="scripts/main.js"></script>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-24 md:pt-32 pb-16 md:pb-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 -z-10"></div>
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-dark leading-tight mb-6">
+                    记录我们的<span class="text-primary">点点滴滴</span>
+                </h2>
+                <p class="text-lg text-dark/80 mb-8 max-w-lg">
+                    每一个瞬间都值得珍藏，每一次相遇都值得纪念。在这里，我们共同记录属于我们的爱情故事。
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#add-memory" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-xl flex items-center">
+                        <i class="fa-pencil mr-2"></i>记录此刻
+                    </a>
+                    <a href="#memories" class="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-8 py-3 rounded-full transition-all shadow-md hover:shadow-lg flex items-center">
+                        <i class="fa-book mr-2"></i>查看回忆
+                    </a>
+                </div>
+                <div class="mt-12 flex items-center space-x-6">
+                    <div class="flex -space-x-2">
+                        <img src="https://picsum.photos/seed/boy/100/100" alt="男生头像" class="w-12 h-12 rounded-full border-2 border-white">
+                        <img src="https://picsum.photos/seed/girl/100/100" alt="女生头像" class="w-12 h-12 rounded-full border-2 border-white">
+                    </div>
+                    <div>
+                        <p class="text-dark/70">已共同度过 <span class="text-primary font-bold" id="days-count">0</span> 天</p>
+                        <p class="text-dark/70">记录了 <span class="text-primary font-bold" id="memory-count">0</span> 个美好回忆</p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <div class="relative z-10 animate-float">
+                    <img src="https://picsum.photos/seed/couple/600/400" alt="情侣照片" class="rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-lg">
+                        <p class="text-primary font-bold text-lg">2023.05.20</p>
+                        <p class="text-dark/70 text-sm">我们的第一次约会</p>
+                    </div>
+                </div>
+                <div class="absolute top-1/4 -left-6 w-24 h-24 bg-secondary/30 rounded-full blur-xl -z-10"></div>
+                <div class="absolute bottom-1/4 -right-6 w-32 h-32 bg-primary/30 rounded-full blur-xl -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 回忆墙 -->
+    <section id="memories" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">爱情回忆墙</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">每一个回忆都是一颗闪耀的星星，点缀着我们共同的天空</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="memory-container">
+                <!-- 回忆卡片将通过JavaScript动态生成 -->
+            </div>
+
+            <div class="text-center mt-12">
+                <button id="load-more" class="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-8 py-3 rounded-full transition-all shadow-md hover:shadow-lg flex items-center mx-auto">
+                    <i class="fa-refresh mr-2"></i>加载更多回忆
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 照片墙 -->
+    <section id="gallery" class="py-16 md:py-24 bg-gradient-to-br from-light to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">甜蜜照片墙</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">用照片定格每一个心动瞬间，让美好永远留存</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-container">
+                <!-- 照片将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 重要时刻 -->
+    <section id="milestones" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">爱情里程碑</h2>
+                <p class="text-dark/70 max-w-2xl mx-auto">那些改变我们关系的重要时刻，值得永远铭记</p>
+            </div>
+
+            <div class="relative">
+                <!-- 时间线 -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary/30 z-0"></div>
+                
+                <div class="space-y-12 relative z-10" id="milestones-container">
+                    <!-- 里程碑将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 添加回忆模态框 -->
+    <section id="add-memory" class="fixed inset-0 bg-dark/50 backdrop-blur-sm flex items-center justify-center z-50 hidden" id="memory-modal">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-dark">添加新回忆</h3>
+                    <button id="close-modal" class="text-dark/50 hover:text-dark text-xl">
+                        <i class="fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <form id="memory-form">
+                    <div class="mb-6">
+                        <label for="memory-title" class="block text-dark font-medium mb-2">标题</label>
+                        <input type="text" id="memory-title" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="今天发生了什么美好的事情？">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="memory-date" class="block text-dark font-medium mb-2">日期</label>
+                        <input type="date" id="memory-date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="memory-content" class="block text-dark font-medium mb-2">详细描述</label>
+                        <textarea id="memory-content" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="分享你们今天的故事..."></textarea>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-dark font-medium mb-2">上传照片</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer" id="image-upload">
+                            <i class="fa-cloud-upload text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-500">点击或拖拽照片到这里</p>
+                            <input type="file" accept="image/*" class="hidden" id="image-input">
+                        </div>
+                        <div class="mt-4 hidden" id="preview-container">
+                            <img id="image-preview" src="" alt="预览图" class="w-32 h-32 object-cover rounded-lg">
+                            <button type="button" id="remove-image" class="mt-2 text-red-500 text-sm">
+                                <i class="fa-trash mr-1"></i>移除图片
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancel-form" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">取消</button>
+                        <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-md hover:shadow-lg">保存回忆</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fa-heart text-primary text-2xl"></i>
+                        <h3 class="text-xl font-bold">我们的时光胶囊</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">记录属于我们的爱情故事，珍藏每一个心动瞬间。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="#memories" class="text-gray-400 hover:text-primary transition-colors">回忆墙</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-primary transition-colors">照片墙</a></li>
+                        <li><a href="#milestones" class="text-gray-400 hover:text-primary transition-colors">重要时刻</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-envelope text-primary mr-2"></i>
+                            <span>love@example.com</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-phone text-primary mr-2"></i>
+                            <span>+86 131 xxxx xxxx</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa-map-marker text-primary mr-2"></i>
+                            <span>中国，北京</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+                <p>© 2023 我们的时光胶囊. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 模拟数据
+        const mockMemories = [
+            {
+                id: 1,
+                title: "第一次约会",
+                date: "2023-05-20",
+                content: "今天是我们的第一次约会，去了那家我们都很喜欢的咖啡馆，聊了整整一个下午，时间过得好快。",
+                image: "https://picsum.photos/seed/memory1/400/300"
+            },
+            {
+                id: 2,
+                title: "一起看日落",
+                date: "2023-06-15",
+                content: "周末一起去海边看日落，太美了。你靠在我肩上，那一刻觉得好幸福。",
+                image: "https://picsum.photos/seed/memory2/400/300"
+            },
+            {
+                id: 3,
+                title: "她的生日",
+                date: "2023-07-10",
+                content: "精心准备了她的生日惊喜，看到她开心的样子，我也觉得很满足。",
+                image: "https://picsum.photos/seed/memory3/400/300"
+            },
+            {
+                id: 4,
+                title: "一起做饭",
+                date: "2023-08-22",
+                content: "第一次一起做饭，虽然过程有些手忙脚乱，但成品还不错，最重要的是我们在一起。",
+                image: "https://picsum.photos/seed/memory4/400/300"
+            },
+            {
+                id: 5,
+                title: "旅行",
+                date: "2023-09-15",
+                content: "第一次一起旅行，去了那个我们计划了很久的城市，留下了很多美好的回忆。",
+                image: "https://picsum.photos/seed/memory5/400/300"
+            }
+        ];
+
+        const mockGallery = [
+            "https://picsum.photos/seed/gallery1/300/300",
+            "https://picsum.photos/seed/gallery2/300/300",
+            "https://picsum.photos/seed/gallery3/300/300",
+            "https://picsum.photos/seed/gallery4/300/300",
+            "https://picsum.photos/seed/gallery5/300/300",
+            "https://picsum.photos/seed/gallery6/300/300",
+            "https://picsum.photos/seed/gallery7/300/300",
+            "https://picsum.photos/seed/gallery8/300/300"
+        ];
+
+        const mockMilestones = [
+            {
+                id: 1,
+                title: "第一次见面",
+                date: "2023-01-15",
+                content: "在朋友的聚会上第一次见到你，一眼就心动了。",
+                position: "left"
+            },
+            {
+                id: 2,
+                title: "正式在一起",
+                date: "2023-03-05",
+                content: "向你表白成功，从此我们成为了彼此的另一半。",
+                position: "right"
+            },
+            {
+                id: 3,
+                title: "第一次牵手",
+                date: "2023-03-12",
+                content: "一起看电影时，我鼓起勇气牵起了你的手。",
+                position: "left"
+            },
+            {
+                id: 4,
+                title: "见家长",
+                date: "2023-10-01",
+                content: "第一次带你回家见我的父母，他们都很喜欢你。",
+                position: "right"
+            },
+            {
+                id: 5,
+                title: "一起过春节",
+                date: "2024-02-10",
+                content: "第一次一起过春节，包饺子、看春晚，很温馨。",
+                position: "left"
+            }
+        ];
+
+        // DOM元素
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const memoryModal = document.getElementById('memory-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModal = document.getElementById('close-modal');
+        const cancelForm = document.getElementById('cancel-form');
+        const memoryForm = document.getElementById('memory-form');
+        const imageUpload = document.getElementById('image-upload');
+        const imageInput = document.getElementById('image-input');
+        const previewContainer = document.getElementById('preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const removeImage = document.getElementById('remove-image');
+        const daysCount = document.getElementById('days-count');
+        const memoryCount = document.getElementById('memory-count');
+        const memoryContainer = document.getElementById('memory-container');
+        const galleryContainer = document.getElementById('gallery-container');
+        const milestonesContainer = document.getElementById('milestones-container');
+        const loadMoreBtn = document.getElementById('load-more');
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+
+        // 移动端菜单切换
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuToggle.innerHTML = '<i class="fa-bars"></i>';
+            } else {
+                menuToggle.innerHTML = '<i class="fa-times"></i>';
+            }
+        });
+
+        // 计算在一起的天数
+        function calculateDays() {
+            const startDate = new Date('2023-03-05'); // 在一起的日期
+            const today = new Date();
+            const timeDiff = today.getTime() - startDate.getTime();
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            daysCount.textContent = daysDiff;
+        }
+
+        // 渲染回忆卡片
+        function renderMemories(memories) {
+            memoryContainer.innerHTML = '';
+            
+            memories.forEach(memory => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-xl shadow-lg overflow-hidden memory-card-hover';
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${memory.image}" alt="${memory.title}" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-primary">
+                            ${memory.date}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-dark mb-2">${memory.title}</h3>
+                        <p class="text-dark/70 line-clamp-3 mb-4">${memory.content}</p>
+                        <button class="text-primary hover:text-primary/80 font-medium flex items-center transition-colors" data-id="${memory.id}">
+                            查看详情 <i class="fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                `;
+                memoryContainer.appendChild(card);
+            });
+            
+            // 更新回忆数量
+            memoryCount.textContent = memories.length;
+        }
+
+        // 渲染照片墙
+        function renderGallery(images) {
+            galleryContainer.innerHTML = '';
+            
+            images.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'overflow-hidden rounded-lg relative group cursor-pointer';
+                galleryItem.innerHTML = `
+                    <img src="${image}" alt="照片" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <i class="fa-search-plus text-white text-3xl"></i>
+                    </div>
+                `;
+                galleryContainer.appendChild(galleryItem);
+            });
+        }
+
+        // 渲染里程碑
+        function renderMilestones(milestones) {
+            milestonesContainer.innerHTML = '';
+            
+            milestones.forEach(milestone => {
+                const isLeft = milestone.position === 'left';
+                const milestoneItem = document.createElement('div');
+                milestoneItem.className = `flex ${isLeft ? 'justify-start' : 'justify-end'}`;
+                
+                milestoneItem.innerHTML = `
+                    <div class="w-full md:w-5/12 ${isLeft ? 'pr-12' : 'pl-12'} relative">
+                        <div class="absolute top-0 ${isLeft ? 'right-0' : 'left-0'} transform translate-x-${isLeft ? '1/2' : '-1/2'} w-4 h-4 bg-primary rounded-full border-4 border-white z-10"></div>
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                    <i class="fa-star text-primary"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-dark">${milestone.title}</h3>
+                            </div>
+                            <p class="text-dark/70 mb-2">${milestone.date}</p>
+                            <p class="text-dark/80">${milestone.content}</p>
+                        </div>
+                    </div>
+                `;
+                milestonesContainer.appendChild(milestoneItem);
+            });
+        }
+
+        // 打开模态框
+        function openModal() {
+            memoryModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        // 关闭模态框
+        function closeModalFunc() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                memoryModal.classList.add('hidden');
+                // 重置表单
+                memoryForm.reset();
+                previewContainer.classList.add('hidden');
+            }, 300);
+        }
+
+        // 图片上传预览
+        function setupImageUpload() {
+            imageUpload.addEventListener('click', () => {
+                imageInput.click();
+            });
+            
+            imageInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        previewContainer.classList.remove('hidden');
+                    }
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+            
+            removeImage.addEventListener('click', () => {
+                imageInput.value = '';
+                previewContainer.classList.add('hidden');
+            });
+        }
+
+        // 表单提交处理
+        function handleFormSubmit() {
+            memoryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const title = document.getElementById('memory-title').value;
+                const date = document.getElementById('memory-date').value;
+                const content = document.getElementById('memory-content').value;
+                const image = imageInput.files && imageInput.files[0] ? URL.createObjectURL(imageInput.files[0]) : 'https://picsum.photos/seed/default/400/300';
+                
+                if (!title || !date || !content) {
+                    alert('请填写所有必填字段');
+                    return;
+                }
+                
+                // 创建新回忆对象
+                const newMemory = {
+                    id: Date.now(),
+                    title,
+                    date,
+                    content,
+                    image
+                };
+                
+                // 添加到回忆列表
+                mockMemories.unshift(newMemory);
+                
+                // 重新渲染回忆墙
+                renderMemories(mockMemories);
+                
+                // 关闭模态框
+                closeModalFunc();
+                
+                // 显示成功提示
+                alert('回忆已成功添加！');
+            });
+        }
+
+        // 初始化页面
+        function init() {
+            calculateDays();
+            renderMemories(mockMemories);
+            renderGallery(mockGallery);
+            renderMilestones(mockMilestones);
+            setupImageUpload();
+            handleFormSubmit();
+            
+            // 添加事件监听器
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // 关闭移动菜单（如果打开）
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            menuToggle.innerHTML = '<i class="fa-bars"></i>';
+                        }
+                        
+                        // 平滑滚动到目标位置
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 模态框相关事件
+            document.querySelectorAll('.bg-primary').forEach(btn => {
+                if (btn.textContent.includes('添加回忆') || btn.textContent.includes('记录此刻')) {
+                    btn.addEventListener('click', openModal);
+                }
+            });
+            
+            closeModal.addEventListener('click', closeModalFunc);
+            cancelForm.addEventListener('click', closeModalFunc);
+            
+            // 点击模态框外部关闭
+            memoryModal.addEventListener('click', (e) => {
+                if (e.target === memoryModal) {
+                    closeModalFunc();
+                }
+            });
+            
+            // 加载更多回忆
+            loadMoreBtn.addEventListener('click', () => {
+                // 模拟加载更多回忆
+                loadMoreBtn.innerHTML = '<i class="fa-spinner fa-spin mr-2"></i>加载中...';
+                
+                setTimeout(() => {
+                    // 添加更多模拟数据
+                    const moreMemories = [
+                        {
+                            id: 6,
+                            title: "一起看电影",
+                            date: "2023-11-15",
+                            content: "周末一起去看了期待已久的电影，爆米花很好吃，电影也很精彩。",
+                            image: "https://picsum.photos/seed/memory6/400/300"
+                        },
+                        {
+                            id: 7,
+                            title: "下雪了",
+                            date: "2023-12-25",
+                            content: "今年的第一场雪，我们一起堆了雪人，还拍了很多照片。",
+                            image: "https://picsum.photos/seed/memory7/400/300"
+                        },
+                        {
+                            id: 8,
+                            title: "周年纪念",
+                            date: "2024-03-05",
+                            content: "我们一周年纪念日，去了第一次约会的地方，感觉一切都像昨天一样。",
+                            image: "https://picsum.photos/seed/memory8/400/300"
+                        }
+                    ];
+                    
+                    mockMemories.push(...moreMemories);
+                    renderMemories(mockMemories);
+                    loadMoreBtn.innerHTML = '<i class="fa-refresh mr-2"></i>加载更多回忆';
+                }, 1000);
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
     
