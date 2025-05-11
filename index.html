@@ -20,7 +20,7 @@
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
@@ -31,7 +31,7 @@
                 content-visibility: auto;
             }
             .text-shadow {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0, 0.2);
             }
             .animate-float {
                 animation: float 3s ease-in-out infinite;
@@ -49,6 +49,7 @@
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
@@ -65,9 +66,7 @@
                 <a href="#memories" class="text-dark hover:text-primary transition-colors font-medium">回忆墙</a>
                 <a href="#gallery" class="text-dark hover:text-primary transition-colors font-medium">照片墙</a>
                 <a href="#milestones" class="text-dark hover:text-primary transition-colors font-medium">重要时刻</a>
-                <a href="#add-memory" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all shadow-md hover:shadow-lg">
-                    <i class="fa-plus mr-2"></i>添加回忆
-                </a>
+                <a href="#cities" class="text-dark hover:text-primary transition-colors font-medium">一起点亮过的城市</a>
             </nav>
             <button class="md:hidden text-dark text-xl" id="menu-toggle">
                 <i class="fa-bars"></i>
@@ -80,9 +79,7 @@
                 <a href="#memories" class="text-dark hover:text-primary transition-colors font-medium py-2">回忆墙</a>
                 <a href="#gallery" class="text-dark hover:text-primary transition-colors font-medium py-2">照片墙</a>
                 <a href="#milestones" class="text-dark hover:text-primary transition-colors font-medium py-2">重要时刻</a>
-                <a href="#add-memory" class="bg-primary hover:bg-primary/90 text-white px-5 py-3 rounded-full transition-all shadow-md hover:shadow-lg text-center">
-                    <i class="fa-plus mr-2"></i>添加回忆
-                </a>
+                <a href="#cities" class="text-dark hover:text-primary transition-colors font-medium py-2">一起点亮过的城市</a>
             </div>
         </div>
     </header>
@@ -99,10 +96,7 @@
                     每一个瞬间都值得珍藏，每一次相遇都值得纪念。在这里，我们共同记录属于我们的爱情故事。
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#add-memory" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full transition-all shadow-lg hover:shadow-xl flex items-center">
-                        <i class="fa-pencil mr-2"></i>记录此刻
-                    </a>
-                    <a href="#memories" class="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-8 py-3 rounded-full transition-all shadow-md hover:shadow-lg flex items-center">
+                    <a href="#" class="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-8 py-3 rounded-full transition-all shadow-md hover:shadow-lg flex items-center">
                         <i class="fa-book mr-2"></i>查看回忆
                     </a>
                 </div>
@@ -184,57 +178,25 @@
         </div>
     </section>
 
-    <!-- 添加回忆模态框 -->
-    <section id="add-memory" class="fixed inset-0 bg-dark/50 backdrop-blur-sm flex items-center justify-center z-50 hidden" id="memory-modal">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
-            <div class="p-6 border-b">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xl font-bold text-dark">添加新回忆</h3>
-                    <button id="close-modal" class="text-dark/50 hover:text-dark text-xl">
-                        <i class="fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="p-6">
-                <form id="memory-form">
-                    <div class="mb-6">
-                        <label for="memory-title" class="block text-dark font-medium mb-2">标题</label>
-                        <input type="text" id="memory-title" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="今天发生了什么美好的事情？">
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label for="memory-date" class="block text-dark font-medium mb-2">日期</label>
-                        <input type="date" id="memory-date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label for="memory-content" class="block text-dark font-medium mb-2">详细描述</label>
-                        <textarea id="memory-content" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" placeholder="分享你们今天的故事..."></textarea>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-dark font-medium mb-2">上传照片</label>
-                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer" id="image-upload">
-                            <i class="fa-cloud-upload text-3xl text-gray-400 mb-2"></i>
-                            <p class="text-gray-500">点击或拖拽照片到这里</p>
-                            <input type="file" accept="image/*" class="hidden" id="image-input">
-                        </div>
-                        <div class="mt-4 hidden" id="preview-container">
-                            <img id="image-preview" src="" alt="预览图" class="w-32 h-32 object-cover rounded-lg">
-                            <button type="button" id="remove-image" class="mt-2 text-red-500 text-sm">
-                                <i class="fa-trash mr-1"></i>移除图片
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="flex justify-end space-x-4">
-                        <button type="button" id="cancel-form" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">取消</button>
-                        <button type="submit" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors shadow-md hover:shadow-lg">保存回忆</button>
-                    </div>
-                </form>
-            </div>
+    <!-- 一起点亮过的城市 -->
+<section id="cities" class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">一起点亮过的城市</h2>
+            <p class="text-dark/70 max-w-2xl mx-auto">那些我们一起走过的城市，都是爱情的足迹</p>
         </div>
-    </section>
+        <div class="relative rounded-lg overflow-hidden shadow-xl">
+            <!-- 使用iframe嵌入本地HTML文件 -->
+            <iframe 
+                src="couple_travel_map.html" 
+                width="100%" 
+                height="600px" 
+                frameborder="0" 
+                class="w-full h-[600px]"
+            ></iframe>
+        </div>
+    </div>
+</section>
 
     <!-- 页脚 -->
     <footer class="bg-dark text-white py-12">
@@ -269,9 +231,9 @@
                         <li><a href="#memories" class="text-gray-400 hover:text-primary transition-colors">回忆墙</a></li>
                         <li><a href="#gallery" class="text-gray-400 hover:text-primary transition-colors">照片墙</a></li>
                         <li><a href="#milestones" class="text-gray-400 hover:text-primary transition-colors">重要时刻</a></li>
+                        <li><a href="#cities" class="text-gray-400 hover:text-primary transition-colors">一起点亮过的城市</a></li>
                     </ul>
                 </div>
-                
                 
             </div>
             
